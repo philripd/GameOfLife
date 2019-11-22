@@ -26,7 +26,6 @@ public class GameOfLife
         numGenerations = s.nextInt();
         
         // Tests
-        board.setCell(0, 0, 1);
         board.setCell(0, 1, 1);
         board.setCell(0, 2, 1);
         board.print();
