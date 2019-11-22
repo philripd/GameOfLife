@@ -28,6 +28,7 @@ public class GameOfLife
         // Tests
         board.setCell(0, 1, 1);
         board.setCell(0, 2, 1);
+        board.setCell(0, 3, 1);
         board.print();
         
         
