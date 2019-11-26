@@ -3,7 +3,7 @@ import java.util.*;
 
 public class GameOfLife
 {
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args) throws IOException, InterruptedException
     {
         FileInputStream fileByteStream;
         Scanner s = new Scanner(System.in);
@@ -19,18 +19,20 @@ public class GameOfLife
         fileByteStream = new FileInputStream(fileName);
         fileReader = new Scanner(fileByteStream);
         Board board = new Board(fileReader);
-        
 
-        // Prompt user for numger of generations to run
+        // Prompt user for number of generations to run
         System.out.println("Enter how many generations to compute: ");
         numGenerations = s.nextInt();
-        
+
         // Tests
+        /*
         board.setCell(0, 1, 1);
         board.setCell(0, 2, 1);
         board.setCell(0, 3, 1);
-        board.print();
-        
+        */
+
+        // Compute generations
+        board.computeNextGeneration(numGenerations);
         
         fileByteStream.close();
         fileReader.close();
