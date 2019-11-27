@@ -2,8 +2,8 @@ import java.util.*;
 
 public class Board
 {
-    private int x;                      // Number of columns
-    private int y;                      // Number of rows
+    private int numColumns;             // Number of columns
+    private int numRows;                // Number of rows
     private int currentGeneration = 1;  // Current generation index
     private int neighbors;              // Number of a cell's neighbors
     private char[][] gameBoard;         // Actual game board
@@ -12,16 +12,16 @@ public class Board
     public Board(Scanner fileReader)
     {
         // Read board size
-        x = fileReader.nextInt();
-        y = fileReader.nextInt();
+        numColumns = fileReader.nextInt();
+        numRows = fileReader.nextInt();
         fileReader.nextLine();
 
-        gameBoard = new char[y][x];
+        gameBoard = new char[numRows][numColumns];
 
         // Set initial board values
-        for (int i = 0; i < y; i++)
+        for (int i = 0; i < numRows; i++)
         {
-            for (int j = 0; j < x; j++)
+            for (int j = 0; j < numColumns; j++)
             {
                 gameBoard[i][j] = fileReader.next().charAt(0);
             }
@@ -31,19 +31,23 @@ public class Board
     // Return number of columns
     public int getColumns()
     {
-        return this.x;
+        return this.numColumns;
     }
 
     // Return number of rows
     public int getRows()
     {
-        return this.y;
+        return this.numRows;
     }
 
-    // Return 0 if cell is '0'
+    // Return 0 if cell is '0' or out of bounds
     // Return 1 if cell is 'X'
     public int getCell(int column, int row)
     {
+        if (column < 0 || column > numColumns || row < 0 || row > numRows)
+        {
+            return 0;
+        }
         if (gameBoard[row][column] == '0')
         {
             return 0;
@@ -81,18 +85,18 @@ public class Board
         // Prints board on 1s (1000ms) intervals
         Thread.sleep(1000);
 
-        // Creating temporary board, tempBoard
-        tempBoard = new char[y][x];
+        // Creates temporary board, tempBoard
+        tempBoard = new char[numRows][numColumns];
 
-        // Computing next generation values and assigning to tempBoard
-        for (int i = 0; i < y; i++)
+        // Computes next generation values and assigning to tempBoard
+        for (int i = 0; i < numRows; i++)
         {
-            for (int j = 0; j < x; j++)
+            for (int j = 0; j < numColumns; j++)
             {
                 // Check amount of neighbors
-                neighbors = calculateNeighbors(y, x);
+                neighbors = calculateNeighbors(numRows, numColumns);
                 
-                // If cell is currently alive
+                // Check if cell is currently alive
                 if (gameBoard[i][j] == 'X')
                 {
                     if (neighbors < 2 || neighbors > 3)
@@ -121,9 +125,9 @@ public class Board
         }
 
         // Update gameBoard using tempBoard
-        for (int i = 0; i < y; i++)
+        for (int i = 0; i < numRows; i++)
         {
-            for (int j = 0; j < x; j++)
+            for (int j = 0; j < numColumns; j++)
             {
                 gameBoard[i][j] = tempBoard[i][j];
             }
@@ -142,9 +146,9 @@ public class Board
     // Print out current board
     public void print()
     {
-        for (int i = 0; i < y; i++)
+        for (int i = 0; i < numRows; i++)
         {
-            for (int j = 0; j < x; j++)
+            for (int j = 0; j < numColumns; j++)
             {
                 System.out.print(gameBoard[i][j] + " ");
             }
