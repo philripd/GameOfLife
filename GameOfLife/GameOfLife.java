@@ -24,13 +24,6 @@ public class GameOfLife
         System.out.println("Enter how many generations to compute: ");
         numGenerations = s.nextInt();
 
-        // Tests
-        /*
-        board.setCell(0, 1, 1);
-        board.setCell(0, 2, 1);
-        board.setCell(0, 3, 1);
-        */
-
         // Compute generations
         board.computeNextGeneration(numGenerations);
         
