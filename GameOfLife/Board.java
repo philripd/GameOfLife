@@ -79,24 +79,24 @@ public class Board
         System.out.println("Generation: " + currentGeneration);
         System.out.println();
 
-        // Prints current generation
+        // Print current generation
         print();
 
-        // Prints board on 1s (1000ms) intervals
+        // Print board on 1s (1000ms) intervals
         Thread.sleep(1000);
 
-        // Creates temporary board, tempBoard
+        // Create temporary board, tempBoard
         tempBoard = new char[numRows][numColumns];
 
-        // Computes next generation values and assigning to tempBoard
+        // Compute next generation values and assigning to tempBoard
         for (int i = 0; i < numRows; i++)
         {
             for (int j = 0; j < numColumns; j++)
             {
                 // Check amount of neighbors
-                neighbors = calculateNeighbors(numRows, numColumns);
-                
-                // Check if cell is currently alive
+                neighbors = calculateNeighbors(i, j);
+
+                // Set cell if cell is currently alive
                 if (gameBoard[i][j] == 'X')
                 {
                     if (neighbors < 2 || neighbors > 3)
@@ -109,7 +109,7 @@ public class Board
                     }
                 }
 
-                // If cell is currently dead
+                // Set cell if cell is currently dead
                 if (gameBoard[i][j] == '0')
                 {
                     if (neighbors == 3)
@@ -136,7 +136,7 @@ public class Board
         // Increment current generation counter
         currentGeneration++;
 
-        // Method recursively calls itself
+        // Recursive call
         if (numGenerations > 1)
         {
             computeNextGeneration(numGenerations - 1);
@@ -155,47 +155,255 @@ public class Board
             System.out.println();
         }
     }
-    
+
     // Check if cell has a Neighbor
     private int calculateNeighbors(int row, int column)
     {
         int numNeighbors = 0;
-
-        /*
         
-        if cell is in first row
+        // up = row - 1;
+        // down = row + 1;
+        // left = column - 1;
+        // right = column + 1;
+
+        // If cell is in first row
+        if (row == 0)
         {
-            if cell is in first column          (top left corner)
-                check bottom, bottom right, right
-            else if cell is in last column      (top right corner)
-                check left, bottom left, bottom
-            else
-                check left, bottom left, bottom, bottom right, right
+          if (column == 0)  // top left corner cell
+          {
+            // Check right
+            if (gameBoard[row][column+1] == 'X')
+            {
+              numNeighbors++;
+            }
+            // Check bottom
+            if (gameBoard[row+1][column] == 'X')
+            {
+              numNeighbors++;
+            }
+            // Check bottom right
+            if (gameBoard[row+1][column+1] == 'X')
+            {
+              numNeighbors++;
+            }
+          }
+          else if (column == numColumns-1)  // top right corner cell
+          {
+            // Check left
+            if (gameBoard[row][column-1] == 'X')
+            {
+              numNeighbors++;
+            }
+            // Check bottom left
+            if (gameBoard[row+1][column-1] == 'X')
+            {
+              numNeighbors++;
+            }
+            // Check bottom
+            if (gameBoard[row+1][column] == 'X')
+            {
+              numNeighbors++;
+            }
+          }
+          else
+          {
+            // Check left
+            if (gameBoard[row][column-1] == 'X')
+            {
+              numNeighbors++;
+            }
+            // Check right
+            if (gameBoard[row][column+1] == 'X')
+            {
+              numNeighbors++;
+            }
+            // Check bottom left
+            if (gameBoard[row+1][column-1] == 'X')
+            {
+              numNeighbors++;
+            }
+            // Check bottom
+            if (gameBoard[row+1][column] == 'X')
+            {
+              numNeighbors++;
+            }
+            // Check bottom right
+            if (gameBoard[row+1][column+1] == 'X')
+            {
+              numNeighbors++;
+            }
+          }
         }
-        else if cell is in last row
+        // If cell is in last row
+        else if (row == numRows-1)
         {
-            if cell is in first column          (bottom left corner)
-                check top, top right, right
-            else if cell is in last column      (bottom right corner)
-                check left, top left, top
-            else
-                check left, top left, top, top right, right
+          if (column == 0)  // bottom left corner cell
+          {
+            // Check top
+            if (gameBoard[row-1][column] == 'X')
+            {
+              numNeighbors++;
+            }
+            // Check top right
+            if (gameBoard[row-1][column+1] == 'X')
+            {
+              numNeighbors++;
+            }
+            // Check right
+            if (gameBoard[row][column+1] == 'X')
+            {
+              numNeighbors++;
+            }
+          }
+          else if (column == numColumns-1)  // bottom right corner cell
+          {
+            // Check top left
+            if (gameBoard[row-1][column-1] == 'X')
+            {
+              numNeighbors++;
+            }
+            // Check top
+            if (gameBoard[row-1][column] == 'X')
+            {
+              numNeighbors++;
+            }
+            // Check left
+            if (gameBoard[row][column-1] == 'X')
+            {
+              numNeighbors++;
+            }
+          }
+          else
+          {
+            // Check top left
+            if (gameBoard[row-1][column-1] == 'X')
+            {
+              numNeighbors++;
+            }
+            // Check top
+            if (gameBoard[row-1][column] == 'X')
+            {
+              numNeighbors++;
+            }
+            // Check top right
+            if (gameBoard[row-1][column+1] == 'X')
+            {
+              numNeighbors++;
+            }
+            // Check left
+            if (gameBoard[row][column-1] == 'X')
+            {
+              numNeighbors++;
+            }
+            // Check right
+            if (gameBoard[row][column+1] == 'X')
+            {
+              numNeighbors++;
+            }
+          }
         }
-        else if cell is in first column
+        // If cell is in first column
+        else if (column == 0)
         {
-            check top, top right, right, bottom right, bottom
+          // Check top
+          if (gameBoard[row-1][column] == 'X')
+          {
+            numNeighbors++;
+          }
+          // Check top right
+          if (gameBoard[row-1][column+1] == 'X')
+          {
+            numNeighbors++;
+          }
+          // Check right
+          if (gameBoard[row][column+1] == 'X')
+          {
+            numNeighbors++;
+          }
+          // Check bottom
+          if (gameBoard[row+1][column] == 'X')
+          {
+            numNeighbors++;
+          }
+          // Check bottom right
+          if (gameBoard[row+1][column+1] == 'X')
+          {
+            numNeighbors++;
+          }
         }
-        else if cell is in last column
+        // If cell is in last column
+        else if (column == numColumns-1)
         {
-            check top, top left, left, bottom left, bottom
+          // Check top left
+          if (gameBoard[row-1][column-1] == 'X')
+          {
+            numNeighbors++;
+          }
+          // Check top
+          if (gameBoard[row-1][column] == 'X')
+          {
+            numNeighbors++;
+          }
+          // Check left
+          if (gameBoard[row][column-1] == 'X')
+          {
+            numNeighbors++;
+          }
+          // Check bottom left
+          if (gameBoard[row+1][column-1] == 'X')
+          {
+            numNeighbors++;
+          }
+          // Check bottom
+          if (gameBoard[row+1][column] == 'X')
+          {
+            numNeighbors++;
+          }
         }
+        // Remaining center cells
         else
         {
-            check all eight cells around
+          // Check top left
+          if (gameBoard[row-1][column-1] == 'X')
+          {
+            numNeighbors++;
+          }
+          // Check top
+          if (gameBoard[row-1][column] == 'X')
+          {
+            numNeighbors++;
+          }
+          // Check top right
+          if (gameBoard[row-1][column+1] == 'X')
+          {
+            numNeighbors++;
+          }
+          // Check left
+          if (gameBoard[row][column-1] == 'X')
+          {
+            numNeighbors++;
+          }
+          // Check right
+          if (gameBoard[row][column+1] == 'X')
+          {
+            numNeighbors++;
+          }
+          // Check bottom left
+          if (gameBoard[row+1][column-1] == 'X')
+          {
+            numNeighbors++;
+          }
+          // Check bottom
+          if (gameBoard[row+1][column] == 'X')
+          {
+            numNeighbors++;
+          }
+          // Check bottom right
+          if (gameBoard[row+1][column+1] == 'X')
+          {
+            numNeighbors++;
+          }
         }
-
-        */
-        
         return numNeighbors;
     }
 }
