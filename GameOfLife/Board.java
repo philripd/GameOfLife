@@ -1,3 +1,15 @@
+/***************************************************************
+* File: Board.java
+* Author: D. Phung, P. Dang, C. McCarry
+* Class: CS 141 – Programming and Problem Solving
+*
+* Assignment: Program Assignment 5
+* Date last modified: 12/3/2019
+*
+* Purpose: 
+*
+****************************************************************/
+
 import java.util.*;
 
 public class Board
@@ -9,6 +21,8 @@ public class Board
     private char[][] gameBoard;         // Actual game board
     private char[][] tempBoard;         // Temporary game board
 
+    // Method: Board
+    // Purpose: constructor method
     public Board(Scanner fileReader)
     {
         // Read board size
@@ -28,20 +42,24 @@ public class Board
         }
     }
 
-    // Return number of columns
+    // Method: getColumns
+    // Purpose: return number of columns
     public int getColumns()
     {
         return this.numColumns;
     }
 
-    // Return number of rows
+    // Method: getRows
+    // Purpose: return number of rows
     public int getRows()
     {
         return this.numRows;
     }
 
-    // Return 0 if cell is '0' or out of bounds
-    // Return 1 if cell is 'X'
+    // Method: getCell
+    // Purpose:
+    // - return 0 if cell is '0' or out of bounds
+    // - return 1 if cell is 'X'
     public int getCell(int column, int row)
     {
         if (column < 0 || column > numColumns || row < 0 || row > numRows)
@@ -55,7 +73,8 @@ public class Board
         return 1;
     }
 
-    // Set cell to '0' or 'X'
+    // Method: setCell
+    // Purpose: set cell to '0' or 'X'
     public void setCell(int column, int row, int value)
     {
         if (value == 0)
@@ -72,7 +91,8 @@ public class Board
         }
     }
 
-    // Compute next generation
+    // Method: computeNextGeneration
+    // Purpose: compute next generation and assign to gameBoard
     public void computeNextGeneration(int numGenerations) throws InterruptedException
     {
         System.out.println();
@@ -143,7 +163,8 @@ public class Board
         }
     }
 
-    // Print out current board
+    // Method: print
+    // Purpose: print out current gameBoard
     public void print()
     {
         for (int i = 0; i < numRows; i++)
@@ -156,7 +177,8 @@ public class Board
         }
     }
 
-    // Check if cell has a Neighbor
+    // Method: calculateNeighbor
+    // Purpose: look for and return number of neighbors the cell has
     private int calculateNeighbors(int row, int column)
     {
         int numNeighbors = 0;

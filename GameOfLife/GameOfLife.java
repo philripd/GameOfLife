@@ -1,3 +1,15 @@
+/***************************************************************
+*   File: GameOfLife.java
+*   Author: D. Phung, P. Dang, C. McCarry
+*   Class: CS 141 – Programming and Problem Solving
+*
+*   Assignment: Program Assignment 5
+*   Date last modified: 12/3/2019
+*
+* Purpose:
+*
+****************************************************************/
+
 import java.io.*;
 import java.util.*;
 
@@ -14,7 +26,7 @@ public class GameOfLife
         // Prompt user for file name
         System.out.println("Enter file name: ");
         fileName = s.nextLine();
-        
+
         // Create board
         fileByteStream = new FileInputStream(fileName);
         fileReader = new Scanner(fileByteStream);
