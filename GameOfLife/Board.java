@@ -4,7 +4,7 @@
 *   Class: CS 1400 – Introduction to Programming and Problem Solving
 *
 *   Assignment: Program Assignment 5
-*   Date last modified: 12/3/2019
+*   Date last modified: 12/4/2019
 *
 *   Purpose: Creates and manipulates the boards needed to implement
 *   Conway's Game of Life.
@@ -23,7 +23,7 @@ public class Board
     private char[][] tempBoard;         // Temporary game board
 
     // Method: Board
-    // Purpose: constructor method that creates a new board
+    // Purpose: Constructor method which creates a new board
     public Board(Scanner fileReader)
     {
         // Read board size
@@ -45,14 +45,14 @@ public class Board
     }
 
     // Method: getColumns
-    // Purpose: return number of columns
+    // Purpose: Return number of columns
     public int getColumns()
     {
         return this.numColumns;
     }
 
     // Method: getRows
-    // Purpose: return number of rows
+    // Purpose: Return number of rows
     public int getRows()
     {
         return this.numRows;
@@ -60,8 +60,8 @@ public class Board
 
     // Method: getCell
     // Purpose:
-    // - return 0 if cell is '0' or out of bounds
-    // - return 1 if cell is 'X'
+    //    - Return 0 if cell is '0' or out of bounds
+    //    - Return 1 if cell is 'X'
     public int getCell(int column, int row)
     {
         if (column < 0 || column > numColumns || row < 0 || row > numRows)
@@ -76,7 +76,7 @@ public class Board
     }
 
     // Method: setCell
-    // Purpose: set cell to '0' or 'X'
+    // Purpose: Set cell to '0' or 'X'
     public void setCell(int column, int row, int value)
     {
         if (value == 0)
@@ -94,7 +94,7 @@ public class Board
     }
 
     // Method: computeNextGeneration
-    // Purpose: compute next generation and assign to gameBoard
+    // Purpose: Compute next generation and assign to gameBoard
     public void computeNextGeneration(int numGenerations)
     {
         System.out.println();
@@ -163,7 +163,7 @@ public class Board
     }
 
     // Method: print
-    // Purpose: print out current board
+    // Purpose: Print out current board
     public void print()
     {
         for (int i = 0; i < numRows; i++)
@@ -177,7 +177,7 @@ public class Board
     }
 
     // Method: calculateNeighbors
-    // Purpose: look for and return the number of neighbors a cell has
+    // Purpose: Look for and return the number of neighbors a cell has
     private int calculateNeighbors(int row, int column)
     {
         int numNeighbors = 0;
@@ -193,35 +193,35 @@ public class Board
           if (column == 0)  // top left corner cell
           {
             // Check right
-            if (gameBoard[row][column+1] == 'X')
+            if (gameBoard[row][column + 1] == 'X')
             {
               numNeighbors++;
             }
             // Check bottom
-            if (gameBoard[row+1][column] == 'X')
+            if (gameBoard[row + 1][column] == 'X')
             {
               numNeighbors++;
             }
             // Check bottom right
-            if (gameBoard[row+1][column+1] == 'X')
+            if (gameBoard[row + 1][column + 1] == 'X')
             {
               numNeighbors++;
             }
           }
-          else if (column == numColumns-1)  // top right corner cell
+          else if (column == numColumns - 1)  // top right corner cell
           {
             // Check left
-            if (gameBoard[row][column-1] == 'X')
+            if (gameBoard[row][column - 1] == 'X')
             {
               numNeighbors++;
             }
             // Check bottom left
-            if (gameBoard[row+1][column-1] == 'X')
+            if (gameBoard[row + 1][column - 1] == 'X')
             {
               numNeighbors++;
             }
             // Check bottom
-            if (gameBoard[row+1][column] == 'X')
+            if (gameBoard[row + 1][column] == 'X')
             {
               numNeighbors++;
             }
@@ -229,67 +229,67 @@ public class Board
           else
           {
             // Check left
-            if (gameBoard[row][column-1] == 'X')
+            if (gameBoard[row][column - 1] == 'X')
             {
               numNeighbors++;
             }
             // Check right
-            if (gameBoard[row][column+1] == 'X')
+            if (gameBoard[row][column + 1] == 'X')
             {
               numNeighbors++;
             }
             // Check bottom left
-            if (gameBoard[row+1][column-1] == 'X')
+            if (gameBoard[row + 1][column - 1] == 'X')
             {
               numNeighbors++;
             }
             // Check bottom
-            if (gameBoard[row+1][column] == 'X')
+            if (gameBoard[row + 1][column] == 'X')
             {
               numNeighbors++;
             }
             // Check bottom right
-            if (gameBoard[row+1][column+1] == 'X')
+            if (gameBoard[row + 1][column + 1] == 'X')
             {
               numNeighbors++;
             }
           }
         }
         // If cell is in last row
-        else if (row == numRows-1)
+        else if (row == numRows - 1)
         {
           if (column == 0)  // bottom left corner cell
           {
             // Check top
-            if (gameBoard[row-1][column] == 'X')
+            if (gameBoard[row - 1][column] == 'X')
             {
               numNeighbors++;
             }
             // Check top right
-            if (gameBoard[row-1][column+1] == 'X')
+            if (gameBoard[row - 1][column+1] == 'X')
             {
               numNeighbors++;
             }
             // Check right
-            if (gameBoard[row][column+1] == 'X')
+            if (gameBoard[row][column + 1] == 'X')
             {
               numNeighbors++;
             }
           }
-          else if (column == numColumns-1)  // bottom right corner cell
+          else if (column == numColumns - 1)  // bottom right corner cell
           {
             // Check top left
-            if (gameBoard[row-1][column-1] == 'X')
+            if (gameBoard[row - 1][column - 1] == 'X')
             {
               numNeighbors++;
             }
             // Check top
-            if (gameBoard[row-1][column] == 'X')
+            if (gameBoard[row - 1][column] == 'X')
             {
               numNeighbors++;
             }
             // Check left
-            if (gameBoard[row][column-1] == 'X')
+            if (gameBoard[row][column - 1] == 'X')
             {
               numNeighbors++;
             }
@@ -297,27 +297,27 @@ public class Board
           else
           {
             // Check top left
-            if (gameBoard[row-1][column-1] == 'X')
+            if (gameBoard[row - 1][column - 1] == 'X')
             {
               numNeighbors++;
             }
             // Check top
-            if (gameBoard[row-1][column] == 'X')
+            if (gameBoard[row - 1][column] == 'X')
             {
               numNeighbors++;
             }
             // Check top right
-            if (gameBoard[row-1][column+1] == 'X')
+            if (gameBoard[row - 1][column + 1] == 'X')
             {
               numNeighbors++;
             }
             // Check left
-            if (gameBoard[row][column-1] == 'X')
+            if (gameBoard[row][column - 1] == 'X')
             {
               numNeighbors++;
             }
             // Check right
-            if (gameBoard[row][column+1] == 'X')
+            if (gameBoard[row][column + 1] == 'X')
             {
               numNeighbors++;
             }
@@ -327,12 +327,12 @@ public class Board
         else if (column == 0)
         {
           // Check top
-          if (gameBoard[row-1][column] == 'X')
+          if (gameBoard[row - 1][column] == 'X')
           {
             numNeighbors++;
           }
           // Check top right
-          if (gameBoard[row-1][column+1] == 'X')
+          if (gameBoard[row - 1][column + 1] == 'X')
           {
             numNeighbors++;
           }
@@ -342,41 +342,41 @@ public class Board
             numNeighbors++;
           }
           // Check bottom
-          if (gameBoard[row+1][column] == 'X')
+          if (gameBoard[row + 1][column] == 'X')
           {
             numNeighbors++;
           }
           // Check bottom right
-          if (gameBoard[row+1][column+1] == 'X')
+          if (gameBoard[row + 1][column + 1] == 'X')
           {
             numNeighbors++;
           }
         }
         // If cell is in last column
-        else if (column == numColumns-1)
+        else if (column == numColumns - 1)
         {
           // Check top left
-          if (gameBoard[row-1][column-1] == 'X')
+          if (gameBoard[row - 1][column - 1] == 'X')
           {
             numNeighbors++;
           }
           // Check top
-          if (gameBoard[row-1][column] == 'X')
+          if (gameBoard[row - 1][column] == 'X')
           {
             numNeighbors++;
           }
           // Check left
-          if (gameBoard[row][column-1] == 'X')
+          if (gameBoard[row][column - 1] == 'X')
           {
             numNeighbors++;
           }
           // Check bottom left
-          if (gameBoard[row+1][column-1] == 'X')
+          if (gameBoard[row + 1][column - 1] == 'X')
           {
             numNeighbors++;
           }
           // Check bottom
-          if (gameBoard[row+1][column] == 'X')
+          if (gameBoard[row + 1][column] == 'X')
           {
             numNeighbors++;
           }
@@ -385,42 +385,42 @@ public class Board
         else
         {
           // Check top left
-          if (gameBoard[row-1][column-1] == 'X')
+          if (gameBoard[row - 1][column - 1] == 'X')
           {
             numNeighbors++;
           }
           // Check top
-          if (gameBoard[row-1][column] == 'X')
+          if (gameBoard[row - 1][column] == 'X')
           {
             numNeighbors++;
           }
           // Check top right
-          if (gameBoard[row-1][column+1] == 'X')
+          if (gameBoard[row - 1][column + 1] == 'X')
           {
             numNeighbors++;
           }
           // Check left
-          if (gameBoard[row][column-1] == 'X')
+          if (gameBoard[row][column - 1] == 'X')
           {
             numNeighbors++;
           }
           // Check right
-          if (gameBoard[row][column+1] == 'X')
+          if (gameBoard[row][column + 1] == 'X')
           {
             numNeighbors++;
           }
           // Check bottom left
-          if (gameBoard[row+1][column-1] == 'X')
+          if (gameBoard[row + 1][column - 1] == 'X')
           {
             numNeighbors++;
           }
           // Check bottom
-          if (gameBoard[row+1][column] == 'X')
+          if (gameBoard[row + 1][column] == 'X')
           {
             numNeighbors++;
           }
           // Check bottom right
-          if (gameBoard[row+1][column+1] == 'X')
+          if (gameBoard[row + 1][column + 1] == 'X')
           {
             numNeighbors++;
           }
