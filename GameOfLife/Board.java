@@ -1,3 +1,16 @@
+/*******************************************************************
+*   File: Board.java
+*   Authors: P. Dang, C. McCarry, D. Phung
+*   Class: CS 1400 – Introduction to Programming and Problem Solving
+*
+*   Assignment: Program Assignment 5
+*   Date last modified: 12/3/2019
+*
+*   Purpose: Creates and manipulates the boards needed to implement
+*   Conway's Game of Life.
+*
+*******************************************************************/
+
 import java.util.*;
 
 public class Board
@@ -9,6 +22,8 @@ public class Board
     private char[][] gameBoard;         // Actual game board
     private char[][] tempBoard;         // Temporary game board
 
+    // Method: Board
+    // Purpose: constructor method that creates a new board
     public Board(Scanner fileReader)
     {
         // Read board size
@@ -16,6 +31,7 @@ public class Board
         numRows = fileReader.nextInt();
         fileReader.nextLine();
 
+        // Create board
         gameBoard = new char[numRows][numColumns];
 
         // Set initial board values
@@ -28,20 +44,24 @@ public class Board
         }
     }
 
-    // Return number of columns
+    // Method: getColumns
+    // Purpose: return number of columns
     public int getColumns()
     {
         return this.numColumns;
     }
 
-    // Return number of rows
+    // Method: getRows
+    // Purpose: return number of rows
     public int getRows()
     {
         return this.numRows;
     }
 
-    // Return 0 if cell is '0' or out of bounds
-    // Return 1 if cell is 'X'
+    // Method: getCell
+    // Purpose:
+    // - return 0 if cell is '0' or out of bounds
+    // - return 1 if cell is 'X'
     public int getCell(int column, int row)
     {
         if (column < 0 || column > numColumns || row < 0 || row > numRows)
@@ -55,7 +75,8 @@ public class Board
         return 1;
     }
 
-    // Set cell to '0' or 'X'
+    // Method: setCell
+    // Purpose: set cell to '0' or 'X'
     public void setCell(int column, int row, int value)
     {
         if (value == 0)
@@ -72,8 +93,9 @@ public class Board
         }
     }
 
-    // Compute next generation
-    public void computeNextGeneration(int numGenerations) throws InterruptedException
+    // Method: computeNextGeneration
+    // Purpose: compute next generation and assign to gameBoard
+    public void computeNextGeneration(int numGenerations)
     {
         System.out.println();
         System.out.println("Generation: " + currentGeneration);
@@ -82,10 +104,7 @@ public class Board
         // Print current generation
         print();
 
-        // Print board on 1s (1000ms) intervals
-        Thread.sleep(1000);
-
-        // Create temporary board, tempBoard
+        // Create temporary board
         tempBoard = new char[numRows][numColumns];
 
         // Compute next generation values and assigning to tempBoard
@@ -143,7 +162,8 @@ public class Board
         }
     }
 
-    // Print out current board
+    // Method: print
+    // Purpose: print out current board
     public void print()
     {
         for (int i = 0; i < numRows; i++)
@@ -156,7 +176,8 @@ public class Board
         }
     }
 
-    // Check if cell has a Neighbor
+    // Method: calculateNeighbors
+    // Purpose: look for and return the number of neighbors a cell has
     private int calculateNeighbors(int row, int column)
     {
         int numNeighbors = 0;
@@ -407,68 +428,3 @@ public class Board
         return numNeighbors;
     }
 }
-
-/*
-Pseudocode
-
-X X X X X
-0 0 0 0 0
-0 0 0 0 0
-0 0 0 0 0
-0 0 0 0 0
-if cell is in first row
-{
-    if cell is in first column          (top left corner)
-        check bottom, bottom right, right
-    else if cell is in last column      (top right corner)
-        check left, bottom left, bottom
-    else
-        check left, bottom left, bottom, bottom right, right
-}
-
-0 0 0 0 0
-0 0 0 0 0
-0 0 0 0 0
-0 0 0 0 0
-X X X X X
-else if cell is in last row
-{
-    if cell is in first column          (bottom left corner)
-        check top, top right, right
-    else if cell is in last column      (bottom right corner)
-        check left, top left, top
-    else
-        check left, top left, top, top right, right
-}
-
-0 0 0 0 0
-X 0 0 0 0
-X 0 0 0 0
-X 0 0 0 0
-0 0 0 0 0
-else if cell is in first column
-{
-    check top, top right, right, bottom right, bottom
-}
-
-0 0 0 0 0
-0 0 0 0 X
-0 0 0 0 X
-0 0 0 0 X
-0 0 0 0 0
-else if cell is in last column
-{
-    check top, top left, left, bottom left, bottom
-}
-
-0 0 0 0 0
-0 X X X 0
-0 X X X 0
-0 X X X 0
-0 0 0 0 0
-else
-{
-    check all eight cells around
-}
-
-*/
