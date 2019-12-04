@@ -1,27 +1,28 @@
-/***************************************************************
+/*******************************************************************
 *   File: GameOfLife.java
-*   Author: D. Phung, P. Dang, C. McCarry
-*   Class: CS 141 – Programming and Problem Solving
+*   Authors: P. Dang, C. McCarry, D. Phung
+*   Class: CS 1400 – Introduction to Programming and Problem Solving
 *
 *   Assignment: Program Assignment 5
 *   Date last modified: 12/3/2019
 *
-* Purpose:
+*   Purpose: Implements Conway's Game of Life given a String filename
+*   and an integer number of generations to compute as inputs.
 *
-****************************************************************/
+*******************************************************************/
 
 import java.io.*;
 import java.util.*;
 
 public class GameOfLife
 {
-    public static void main(String[] args) throws IOException, InterruptedException
+    public static void main(String[] args) throws IOException
     {
         FileInputStream fileByteStream;
         Scanner s = new Scanner(System.in);
         Scanner fileReader;
-        String fileName = "";
-        int numGenerations;
+        String fileName = "";               // File name
+        int numGenerations;                 // Number of generations
 
         // Prompt user for file name
         System.out.println("Enter file name: ");
