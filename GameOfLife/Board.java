@@ -98,7 +98,7 @@ public class Board
     public void computeNextGeneration(int numGenerations)
     {
         System.out.println();
-        System.out.println("Generation: " + currentGeneration);
+        System.out.println("Generation " + currentGeneration);
         System.out.println();
 
         // Print current generation
